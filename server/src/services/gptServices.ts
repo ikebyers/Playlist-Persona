@@ -38,11 +38,33 @@ async function generateQuestions(): Promise<string[] | undefined> {
         ],
       });
   
-      console.log(completion.choices[0].message?.content);
-      if (completion.choices[0].message.content) {
-        return completion.choices[0].message.content
-          .split("\n")
-          .filter((q) => q.trim() !== "");
+      // console.log(completion.choices[0].message?.content);
+      const questions = completion.choices[0].message?.content;
+      
+      if (questions) {
+        const questionArray = questions.split("\n").filter(q => q.trim() !== "");
+        const formattedQuestions: any[] = [];
+        let currentQuestion: string | null = null;
+        let currentAnswers: string[] = [];
+  
+        questionArray.forEach(line => {
+          if (line.startsWith('Q')) {
+            if (currentQuestion) {
+              formattedQuestions.push({ question: currentQuestion, answers: currentAnswers })
+            }
+            currentQuestion = line.replace(/^Q\d+:\s*/, "").trim();
+            currentAnswers = [];
+          } else if (line.startsWith('A')) {
+            currentAnswers.push(line.split(":")[1].trim());
+          }
+        });
+  
+        if (currentQuestion) {
+          formattedQuestions.push({ question: currentQuestion, answers: currentAnswers })
+        }
+  
+        // console.log(formattedQuestions);
+        return formattedQuestions;
       }
     } catch (error) {
       console.error("Error generating questions:", error);
