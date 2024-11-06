@@ -1,16 +1,19 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response } from 'express';
 import routes from "./routes/index.js";
 import generateQuestions from "./services/gptServices.js";
-
+import sequelize from './config/connection.js';
 
 
 const app = express();
 const port = 3000;
 
+// Serves static files in the entire client's dist folder
+app.use(express.static('../client/dist'));
+
 app.use(express.json());
 app.use(routes);
 
-app.get('/api/questions', async (req: Request, res: Response) => {
+app.get('/api/questions', async (_req: Request, res: Response) => {
     const questions = await generateQuestions();
     res.json({ questions });
 })
