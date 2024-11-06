@@ -17,8 +17,8 @@
     "render-build": "npm install && npm run build"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
     "concurrently": "^8.2.2",
+    "typescript": "^5.6.3",
     "wait-on": "^7.2.0"
   },
   "repository": {
@@ -30,5 +30,9 @@
   "bugs": {
     "url": "https://github.com/ikebyers/Playlist-Persona/issues"
   },
-  "homepage": "https://github.com/ikebyers/Playlist-Persona#readme"
+  "homepage": "https://github.com/ikebyers/Playlist-Persona#readme",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
 }
