@@ -1,9 +1,7 @@
 -- DROP DATABASE
 DROP DATABASE IF EXISTS playlist_persona;
-
 -- CREATE DATABASE
 CREATE DATABASE playlist_persona;
-
 -- \c playlist_persona;
 
 -- CREATE TABLE users (
@@ -12,7 +10,6 @@ CREATE DATABASE playlist_persona;
 --     userName varchar(30) unique not null,
 --     password varchar(30) not null
 -- );
-
 -- CREATE TABLE playlist (
 --     id SERIAL PRIMARY KEY,
 --     playlist_title varchar(30) NOT NULL,

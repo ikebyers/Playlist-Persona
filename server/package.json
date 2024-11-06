@@ -2,10 +2,21 @@
   "name": "playlist-persona-server",
   "version": "1.0.0",
   "private": true,
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js"
+    "build": "npx tsc",
+    "start": "npm run build && node dist/server.js --ignore client",
+    "dev": "npx nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node dist/seeds/index.js"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts,json,js",
+    "exec": "npx tsc && node dist/server.js"
   },
   "dependencies": {
     "express": "^4.21.1",
