@@ -5,11 +5,11 @@ import React from "react";
 
 import App from './App.tsx';
 
-import ErrorPage from '../../src/pages/ErrorPage.tsx';
-import HomePage from '../../src/pages/HomePage.tsx';
-import LoginPage from '../../src/pages/LoginPage.tsx';
-import ProfilePage from '../../src/pages/ProfilePage.tsx';
-import CurrentPlaylistPage from '../../src/pages/CurrentPlaylistPage.tsx';
+import ErrorPage from '../pages/ErrorPage.tsx';
+import HomePage from '../pages/HomePage.tsx';
+import LoginPage from '../pages/LoginPage.tsx';
+import ProfilePage from '../pages/ProfilePage.tsx';
+import CurrentPlaylistPage from '../pages/CurrentPlaylistPage.tsx';
 
 const router = createBrowserRouter([
   {
