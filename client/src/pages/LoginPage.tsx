@@ -4,7 +4,6 @@ const LoginPage = () => {
     return (
       <section>
         <h1>404: Login page is this</h1>
-        <h1> ¯\_(ツ)_/¯</h1>
       </section>
     );
   };
