@@ -7,6 +7,11 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// interface Question {
+//   question: string;
+//   answers: string[];
+// }
+
 // generate prompt questions
 async function generateQuestions(): Promise<string[] | undefined> {
     try {
@@ -60,7 +65,8 @@ async function generateQuestions(): Promise<string[] | undefined> {
         });
   
         if (currentQuestion) {
-          formattedQuestions.push({ question: currentQuestion, answers: currentAnswers })
+          formattedQuestions.push({ question: currentQuestion, answers: currentAnswers || [],
+          });
         }
   
         // console.log(formattedQuestions);
