@@ -1,4 +1,5 @@
 import { User } from '../models/index.js';
+// import { Playlist } from '../models/playlist.js';
 
 export const seedUsers = async () => {
   await User.bulkCreate(
