@@ -1,23 +1,22 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import { Work, Volunteer } from '../../models/index.js';
-// import { Volunteer } from '../../models/volunteer.js';
+import { User, Playlist } from '../../models/index.js';
 
  const router = express.Router();
 
-//  GET /works - Get all Works
+//  GET /playlist - Get all playlists
 router.get('/', async (_req: Request, res: Response) => {
   try {
-    const works = await Work.findAll({
+    const playlists = await Playlist.findAll({
       include: [
         {
-          model: Volunteer,
-          as: 'assignedVolunteer', // This should match the alias defined in the association
-          attributes: ['volunteerName'], //Include only the volunteerName attribute
+          model: User,
+          as: 'assignedUser', // This should match the alias defined in the association
+          attributes: ['uName'], //Include only the uName attribute
         },
       ],
     });
-    res.json(works);
+    res.json(playlists);
   } catch (error: any) {
     res.status(500).json({
       message: error.message
@@ -25,24 +24,24 @@ router.get('/', async (_req: Request, res: Response) => {
   }
 });
 
-// GET /works/:id - Get work by ID
+// GET /playlist/:id - Get work by user ID
 router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const work = await Work.findByPk(id, {
+    const playlist = await Playlist.findByPk(id, {
       include: [
         {
-          model: Volunteer,
-          as: 'assignedVolunteer', // This should match the alias defined in the association
-          attributes: ['volunteerName'], //Include only the volunteerName attribute
+          model: User,
+          as: 'assignedUser', // This should match the alias defined in the association
+          attributes: ['uName'], //Include only the uName attribute
         },
       ],
     });
-    if(work) {
-      res.json(work);
+    if(playlist) {
+      res.json(playlist);
     } else {
       res.status(404).json({
-        message: 'Work not found'
+        message: 'Playlist not found'
       });
     }
   } catch (error: any) {
@@ -52,14 +51,14 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-// POST /works - Create new work
+// POST /playlist - Create new playlist
 router.post('/', async (req: Request, res: Response) => {
-  const { name, status, description, assignedVolunteerId } = req.body;
+  const { title, timeStamp, songList, assignedUserId } = req.body;
   try {
-    const newWork = await Work.create({
-      name, status, description, assignedVolunteerId
+    const newPlaylist = await Playlist.create({
+      title, timeStamp, songList, assignedUserId
     });
-    res.status(201).json(newWork);
+    res.status(201).json(newPlaylist);
   } catch (error: any) {
     res.status(400).json({
       message: error.message
@@ -67,22 +66,22 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-// PUT /works/:id - Update work by ID
+// PUT /Playlists/:id - Update plyalist by ID
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, status, description, assignedVolunteerId } = req.body;
+  const { title, timeStamp, songList, assignedUserId } = req.body;
   try {
-    const work = await Work.findByPk(id);
-    if(work) {
-      work.name = name;
-      work.status = status;
-      work.description = description;
-      work.assignedVolunteerId = assignedVolunteerId;
-      await work.save();
-      res.json(work);
+    const plyalist = await Playlist.findByPk(id);
+    if(plyalist) {
+      plyalist.title = title;
+      plyalist.timeStamp = timeStamp;
+      plyalist.songList = songList;
+      plyalist.assignedUserId = assignedUserId;
+      await plyalist.save();
+      res.json(plyalist);
     } else {
       res.status(404).json({
-        message: 'Work not found'
+        message: 'Plyalist not found'
       });
     }
   } catch (error: any) {
@@ -92,17 +91,17 @@ router.put('/:id', async (req: Request, res: Response) => {
   }
 });
 
-// DELETE /works/:id - Delete work by ID
+// DELETE /playlist/:id - Delete playlists by ID
 router.delete('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const work = await Work.findByPk(id);
-    if(work) {
-      await work.destroy();
-      res.json({ message: 'Work deleted' });
+    const plyalist = await Playlist.findByPk(id);
+    if(plyalist) {
+      await plyalist.destroy();
+      res.json({ message: 'Playlist deleted' });
     } else {
       res.status(404).json({
-        message: 'Work not found'
+        message: 'Playlist not found'
       });
     }
   } catch (error: any) {
@@ -112,4 +111,4 @@ router.delete('/:id', async (req: Request, res: Response) => {
   }
 });
 
-export { router as workRouter };
+export { router as playlistRouter };
