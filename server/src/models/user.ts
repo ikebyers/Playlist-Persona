@@ -1,19 +1,22 @@
 import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
 import bcrypt from 'bcrypt';
 
-interface UserLogin {
+interface UserAttributes {
   id: number;
+  uName: string;
+  email: string;
   username: string;
   password: string;
 }
 
-interface UserCreateLogin extends Optional<UserLogin, 'id'> {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
-export class User
-  extends Model<UserLogin, UserCreateLogin>
-  implements UserLogin
+export class User extends Model<UserAttributes, UserCreationAttributes>
+  implements UserAttributes
 {
   public id!: number;
+  public uName!: string;
+  public email!: string;
   public username!: string;
   public password!: string;
 
@@ -34,6 +37,14 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+      },
+      uName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       username: {
         type: DataTypes.STRING,
