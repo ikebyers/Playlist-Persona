@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import routes from "./routes/index.js";
+// import routes from "./routes/index.js";
 import generateQuestions from "./services/gptServices.js";
 import cors from "cors";
 // import sequelize from './config/connection.js';
@@ -13,7 +13,7 @@ import cors from "cors";
 
 
 
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(cors({ origin: 'http://localhost:5173'}));
