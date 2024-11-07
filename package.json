@@ -17,6 +17,7 @@
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\""
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "@types/node": "^22.9.0",
@@ -37,6 +38,7 @@
   },
   "homepage": "https://github.com/ikebyers/Playlist-Persona#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",

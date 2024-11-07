@@ -12,4 +12,11 @@ router.get("/api/generate-questions", async (_req, res) => {
     }
 });
 
+
+// router.get('/api/questions', async (_req, res) => {
+//     const questions = await generateQuestions();
+//     res.json({ questions });
+// });
+
+
 export default router;
