@@ -29,13 +29,23 @@ async function generateQuestions(): Promise<Question[]> {
                     Q4: [Question 4]
                     Q5: [Question 5]
                     Q6: [Question 6] --
-                    2 of the questions should be multiple choice (with 15 choices) that serve to understand a user's music genre preferences (one of these questions should be about genre preference explicitly such as genre titles, another one should be synonymous with genre but in less technical terms such as describing mood, feel, tempo, instruments used, etc.)
-                    2 of the questions should be multiple choice with 10 choices that define the user's mood for the day (one being what their mood of the day is, one being what mood of music they'd prefer to listen to)
-                    2 of the questions should require short form answers, nothing more than a sentence or two from the user. One of the short form questions should be an unconventional personality-based question that feels like it may have never been asked before, the other short form question should ask the user in a creative way to summarize an event that happened in their daily life or ask them to describe their day in a few words. These should help provide unique key word responses providing more in depth understanding of the users mood.
+
+                    The first question should be multiple choice (with 15 choices, use one word genre-name) that serve to understand a user's music “genre” preferences (this question should be about genre preference explicitly such as genre titles).
+
+                    The second question should be multiple choice (with 15 choices, use one word options) that serve to understand a user's music “style” preferences (this question should be synonymous with genre but in less technical terms such as describing mood, feel, tempo, instruments used, etc.).
+
+                    The third question should be multiple choice with 10 choices (use one word adjectives) that define the user's “mood for the day”.
+
+                    The fourth question should be multiple choice with 10 choices (use one word adjectives) that define the user's “preferred mood,” in case it differentiates from their current mood.
+
+                    The fifth question should require a short form answer, nothing more than a few words from the user. The short form question should be an unconventional "personality" based question that feels like it may have never been asked before. This should help provide unique key word responses providing more in depth understanding of the users mood.
+
+                    The sixth and final question (multiple choice: 4 options -- Very popular, popular but not mainstream, undiscovered gems, underground) must act as a "filter" for the user to define the type of artist they want to listen to based on popularity and view count of songs.
+
                     Formatting Rules:
-                    In the short form questions, only provide the questions--don't put any 'answer:' guide
-                    In your response, don't provide anything else other than the questions and answer options.
-                    When formatting the questions, provide the answer options for the multiple choice as A1, A2, etc. without bullet points.`,
+                    - In the short form questions, only provide the questions--don't put any 'answer:' guides.
+                    - In your response, don't provide anything else other than the questions and answer options.
+                    - When formatting the questions, provide the answer options for the multiple choice as A1, A2, etc. without bullet points.`,
         },
       ],
     });
@@ -43,7 +53,9 @@ async function generateQuestions(): Promise<Question[]> {
     const questionsData = completion.choices[0].message?.content;
 
     if (questionsData) {
-      const questionArray = questionsData.split("\n").filter((q) => q.trim() !== "");
+      const questionArray = questionsData
+        .split("\n")
+        .filter((q) => q.trim() !== "");
       const formattedQuestions: Question[] = [];
       let currentQuestion: string | null = null;
       let currentAnswers: string[] | null = null;

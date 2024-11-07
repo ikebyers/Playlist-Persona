@@ -22,8 +22,8 @@ const HomePage: React.FC = () => {
         const data = await response.json();
 
         if (Array.isArray(data.questions)) {
-          
-          // localStorage.setItem('questions', JSON.stringify(data.questions));
+          const questionsText = data.questions.map((q: Question) => q.question);
+          localStorage.setItem("questions", JSON.stringify(questionsText));
           // localStorage.setItem('answers', JSON.stringify(data.answers));
           setQuestions(data.questions);
           // data.questions.forEach(element => {
@@ -42,10 +42,21 @@ const HomePage: React.FC = () => {
 
   // Handle response change
   const handleResponseChange = (questionIndex: number, answer: string) => {
-    setResponses((prevResponses) => ({
-      ...prevResponses,
-      [questionIndex]: answer,
-    }));
+    // setResponses((prevResponses) => ({
+    //   ...prevResponses,
+    //   [questionIndex]: answer,
+    // }));
+    setResponses((prevResponses) => {
+      const updatedResponses = {
+        ...prevResponses,
+        [questionIndex]: answer,
+      };
+
+      const responseText = Object.values(updatedResponses);
+      localStorage.setItem("answers", JSON.stringify(responseText));
+
+      return updatedResponses;
+    });
   };
 
   // Handle navigation to the next question
@@ -68,6 +79,8 @@ const HomePage: React.FC = () => {
       return response && response.trim() !== "";
     }
   };
+
+  // const allAnswered = questions.length > 0 && Object.keys(responses).length === questions.length;
 
   return (
     <div>
