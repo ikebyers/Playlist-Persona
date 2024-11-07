@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import './index.css';
-import React from "react";
+// import React from "react";
 
 import App from './App.tsx';
 
@@ -27,10 +27,13 @@ const router = createBrowserRouter([
 ])
 
 const rootElement = document.getElementById('root');
+// if (rootElement) {
+//   ReactDOM.createRoot(rootElement).render(
+//   <React.StrictMode>
+//     <RouterProvider router={router} />
+//   </React.StrictMode>
+//   );
+// }
 if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-  );
+  ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
 }
