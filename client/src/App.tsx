@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Nav from "../../src/components/Navbar.tsx";
+import Nav from "../src/components/Navbar.tsx";
 
 function App() {
 
