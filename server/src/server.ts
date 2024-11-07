@@ -7,17 +7,9 @@ import cors from "cors";
 
 // const PORT = process.env.PORT || 3001;
 
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
-
-
-
-// const PORT = process.env.PORT || 3001;
-
 const app = express();
-app.use(cors({ origin: 'http://localhost:5173'}));
-const port = 3000;
+app.use(cors({ origin: 'http://localhost:3000'}));
+const port = 3001;
 
 
 // // Serves static files in the entire client's dist folder
@@ -26,6 +18,10 @@ const port = 3000;
 // app.use(express.json());
 // app.use(routes);
 
+// app.get('/api/playlist', async (_req: Request, res: Response) => {
+//     const questions = await generatePlaylist();
+//     res.json({ questions });
+// });
 
 app.get('/api/questions', async (_req: Request, res: Response) => {
     const questions = await generateQuestions();

@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
     const fetchQuestions = async () => {
       try {
         console.log("This where i am");
-        const response = await fetch("http://localhost:3000/api/questions");
+        const response = await fetch("http://localhost:3001/api/questions");
 
         if (!response.ok) {
           throw new Error("Failed to fetch questions");
@@ -22,7 +22,13 @@ const HomePage: React.FC = () => {
         const data = await response.json();
 
         if (Array.isArray(data.questions)) {
+          
+          // localStorage.setItem('questions', JSON.stringify(data.questions));
+          // localStorage.setItem('answers', JSON.stringify(data.answers));
           setQuestions(data.questions);
+          // data.questions.forEach(element => {
+          //   localStorage.setItem('questions', JSON.stringify(element));
+          // });
         } else {
           console.log("not an array");
         }
@@ -80,7 +86,7 @@ const HomePage: React.FC = () => {
                 {question.answers.map((answer: string, answerIndex: number) => (
                   <label key={answerIndex}>
                     <input
-                      type="radio"
+                      type="checkbox"
                       name={`question-${index}`}
                       value={answer}
                       onChange={() => handleResponseChange(index, answer)}
@@ -112,38 +118,6 @@ const HomePage: React.FC = () => {
       )}
     </div>
   );
-  // return (
-  //   <div>
-  //     <h1>Questionnaire</h1>
-  //     {!Array.isArray(questions) ? (
-  //       <p>Error: Questions data is not an array</p>
-  //     ) : questions.length === 0 ? (
-  //       <p>Loading questions...</p> // Show loading message if no questions are fetched yet
-  //     ) : (
-  //       questions.map((question, index) => (
-  //         <div key={index}>
-  //           <h2>{question.question}</h2>
-  //           {question.answers ? (
-  //             <div>
-  //               {question.answers.map((answer, answerIndex) => (
-  //                 <label key={answerIndex}>
-  //                   <input
-  //                     type="radio"
-  //                     name={`question-${index}`}
-  //                     value={answer}
-  //                   />
-  //                   {answer}
-  //                 </label>
-  //               ))}
-  //             </div>
-  //           ) : (
-  //             <textarea placeholder="Your answer" />
-  //           )}
-  //         </div>
-  //       ))
-  //     )}
-  //   </div>
-  // );
 };
 
 export default HomePage;
