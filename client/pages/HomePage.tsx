@@ -1,4 +1,6 @@
+
 import { useEffect, useState } from "react";
+
 
 interface Question {
   question: string;
@@ -13,18 +15,22 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
+
         console.log("This where i am");
         const response = await fetch("http://localhost:3000/api/questions");
+
         if (!response.ok) {
           throw new Error("Failed to fetch questions");
         }
         const data = await response.json();
+
         if (Array.isArray(data.questions)) {
           setQuestions(data.questions);
         } else {
           console.log("not an array");
         }
         // setQuestions(data);
+
       } catch (error) {
         console.error("Error fetching questions:", error);
       }
@@ -32,6 +38,7 @@ const HomePage: React.FC = () => {
     fetchQuestions();
     
   }, []);
+  
 
   // Handle response change
   // const handleResponseChange = (questionIndex: number, answer: string) => {
@@ -142,4 +149,6 @@ const HomePage: React.FC = () => {
   );
 };
 
+
 export default HomePage;
+
