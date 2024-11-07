@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import generateQuestions from "./../../server/src/services/gptServices";
 
 interface Question {
   question: string;
@@ -11,30 +10,22 @@ const HomePage: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [responses, setResponses] = useState<{ [key: number]: string }>({});
 
-  // Fetch questions from the API
-  // useEffect(() => {
-  //   const fetchQuestions = async () => {
-  //     const generatedQuestions = await generateQuestions();
-  //     if (generatedQuestions) {
-  //       const questions = [];
-  //       generatedQuestions.forEach(item => {
-  //         questions.push(item.question)
-  //       })
-  //       setQuestions(generatedQuestions);
-  //     }
-  //   };
-  //   fetchQuestions();
-  // }, []);
-
   useEffect(() => {
     const fetchQuestions = async () => {
-      const generatedQuestions = await generateQuestions();
-      if (generatedQuestions) {
-        setQuestions(generatedQuestions); // Directly set as Question[]
+      try {
+        const response = await fetch("/api/generate-questions");
+        if (!response.ok) {
+          throw new Error("Failed to fetch questions");
+        }
+        const data = await response.json();
+        setQuestions(data);
+      } catch (error) {
+        console.error("Error fetching questions:", error);
       }
     };
     fetchQuestions();
   }, []);
+  
 
   // Handle response change
   const handleResponseChange = (questionIndex: number, answer: string) => {
@@ -108,17 +99,5 @@ const HomePage: React.FC = () => {
     </div>
   );
 };
-
-
-
-// const HomePage = () => {
-//     return (
-//       <div>
-//         <div>
-//           <h2>Question 1</h2>
-//         </div>
-//       </div>
-//     );
-//   };
 
 export default HomePage;
