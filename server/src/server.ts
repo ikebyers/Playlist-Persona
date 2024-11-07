@@ -1,10 +1,20 @@
 import express, { Request, Response } from 'express';
 import routes from "./routes/index.js";
 import generateQuestions from "./services/gptServices.js";
+import cors from "cors";
 // import sequelize from './config/connection.js';
+// import app from "./app.js";
+
+// const PORT = process.env.PORT || 3001;
+
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
+
 
 
 const app = express();
+app.use(cors({ origin: 'http://localhost:5173'}));
 const port = 3000;
 
 // Serves static files in the entire client's dist folder
@@ -16,7 +26,25 @@ app.use(routes);
 app.get('/api/questions', async (_req: Request, res: Response) => {
     const questions = await generateQuestions();
     res.json({ questions });
-})
+});
+
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
+});
+
+// const app = express();
+// const port = 3000;
+
+// // Serves static files in the entire client's dist folder
+// app.use(express.static('../client/dist'));
+
+// app.use(express.json());
+// app.use(routes);
+
+// app.get('/api/questions', async (_req: Request, res: Response) => {
+//     const questions = await generateQuestions();
+//     res.json({ questions });
+// })
 
 // const rl = readline.createInterface({
 //   input: process.stdin,
@@ -86,6 +114,6 @@ app.get('/api/questions', async (_req: Request, res: Response) => {
 //   }
 // };
 
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Server is listening on port ${port}`);
+// });
