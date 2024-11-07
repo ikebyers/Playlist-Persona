@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import generateQuestions from "./../../../server/src/services/gptServices";
+import generateQuestions from "./../../server/src/services/gptServices";
 
-// interface Question {
-//   question: string;
-//   answers: string[] | null; // `null` for short-answer questions
-// }
+interface Question {
+  question: string;
+  answers: string[] | null; // `null` for short-answer questions
+}
 
 const HomePage: React.FC = () => {
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [responses, setResponses] = useState<{ [key: number]: string }>({});
 
