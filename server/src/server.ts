@@ -1,26 +1,26 @@
 import express, { Request, Response } from 'express';
-import routes from "./routes/index.js";
+// import routes from "./routes/index.js";
 import generateQuestions from "./services/gptServices.js";
 import cors from "cors";
-import sequelize from './config/connection.js';
+// import sequelize from './config/connection.js';
 // import app from "./app.js";
 
-const forceDatabaseRefresh = false;
+// const forceDatabaseRefresh = false;
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 // Serves static files in the entire client's dist folder
-app.use(express.static('../client/dist'));
+// app.use(express.static('../client/dist'));
 
-app.use(express.json());
-app.use(routes);
+// app.use(express.json());
+// app.use(routes);
 
-sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
-  app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
-  });
-});
+// sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
+//   app.listen(port, () => {
+//     console.log(`Server is listening on port ${port}`);
+//   });
+// });
 
 app.use(cors({ origin: 'http://localhost:3000'}));
 
