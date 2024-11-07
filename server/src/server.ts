@@ -13,15 +13,19 @@ import cors from "cors";
 
 
 
+const PORT = process.env.PORT || 3001;
+
 const app = express();
 app.use(cors({ origin: 'http://localhost:5173'}));
 const port = 3000;
 
-// Serves static files in the entire client's dist folder
-app.use(express.static('../client/dist'));
 
-app.use(express.json());
-app.use(routes);
+// // Serves static files in the entire client's dist folder
+// app.use(express.static('../client/dist'));
+
+// app.use(express.json());
+// app.use(routes);
+
 
 app.get('/api/questions', async (_req: Request, res: Response) => {
     const questions = await generateQuestions();
@@ -40,6 +44,7 @@ app.listen(port, () => {
 
 // app.use(express.json());
 // app.use(routes);
+
 
 // app.get('/api/questions', async (_req: Request, res: Response) => {
 //     const questions = await generateQuestions();
