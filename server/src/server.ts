@@ -1,8 +1,9 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response } from "express";
 import routes from "./routes/index.js";
-import generateQuestions from "./services/gptServices.js";
+import { generatePlaylist, generateQuestions } from "./services/gptServices.js";
+import { searchSong } from "./services/youtubeServices.js";
 import cors from "cors";
-import sequelize from './config/connection.js';
+import sequelize from "./config/connection.js";
 // import app from "./app.js";
 
 const forceDatabaseRefresh = false;
@@ -11,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Serves static files in the entire client's dist folder
-app.use(express.static('../client/dist'));
+app.use(express.static("../client/dist"));
 
 app.use(express.json());
 app.use(routes);
@@ -22,9 +23,7 @@ sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
   });
 });
 
-app.use(cors({ origin: 'http://localhost:3000'}));
-
-
+app.use(cors({ origin: "http://localhost:3000" }));
 
 // // Serves static files in the entire client's dist folder
 // app.use(express.static('../client/dist'));
@@ -32,14 +31,43 @@ app.use(cors({ origin: 'http://localhost:3000'}));
 // app.use(express.json());
 // app.use(routes);
 
-// app.get('/api/playlist', async (_req: Request, res: Response) => {
-//     const questions = await generatePlaylist();
-//     res.json({ questions });
-// });
+app.post("/playlist", async (req: Request, res: Response) => {
+  try {
+    const { questions, answers } = req.body;
 
-app.get('/questions', async (_req: Request, res: Response) => {
-    const questions = await generateQuestions();
-    res.json({ questions });
+    if (!Array.isArray(questions) || !Array.isArray(answers)) {
+      return res
+        .status(400)
+        .json({ error: "titles and artists must be arrays" });
+    } else if (questions.length !== answers.length) {
+      return res
+        .status(400)
+        .json({ error: "titles and artists arrays must have the same length" });
+    }
+
+    const playlist = await generatePlaylist(questions, answers);
+    // console.log("returned from 2nd openaiAPI call", playlist)
+
+    const playlistWithUrls = await Promise.all(
+      playlist.map(async (song) => {
+        // console.log("song structure:", song);
+        // console.log("song:", song.songTitle, "artist:", song.artistName);
+        const url = await searchSong(song.songTitle, song.artistName);
+        // console.log("full song structure", song.songTitle, song.artistName, url);
+        return { ...song, url: url };
+      })
+    );
+    
+    return res.json(playlistWithUrls);
+  } catch (error) {
+    console.error("error generating playlist", error);
+    return res.status(500).json({ error: "error while generating playlist" });
+  }
+});
+
+app.get("/questions", async (_req: Request, res: Response) => {
+  const questions = await generateQuestions();
+  res.json({ questions });
 });
 
 // app.listen(port, () => {
@@ -54,7 +82,6 @@ app.get('/questions', async (_req: Request, res: Response) => {
 
 // app.use(express.json());
 // app.use(routes);
-
 
 // app.get('/api/questions', async (_req: Request, res: Response) => {
 //     const questions = await generateQuestions();
