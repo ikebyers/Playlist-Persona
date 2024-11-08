@@ -42,9 +42,9 @@ app.get('/api/questions', async (_req: Request, res: Response) => {
     res.json({ questions });
 });
 
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Server is listening on port ${port}`);
+// });
 
 // const app = express();
 // const port = 3000;

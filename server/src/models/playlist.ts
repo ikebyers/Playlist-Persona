@@ -1,25 +1,32 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 import { User } from './user.js';
 
+interface Song {
+  title: string;
+  artist: string;
+}
+
 interface PlaylistAttributes {
   id: number;
   title: string;
-  timeStamp: Date;
-  songList: string;
+  songList: Song[];
   assignedUserId?: number;
 }
+
 
 interface PlaylistCreationAttributes extends Optional<PlaylistAttributes, 'id'> {}
 
 export class Playlist extends Model<PlaylistAttributes, PlaylistCreationAttributes> implements PlaylistAttributes {
   public id!: number;
   public title!: string;
-  public timeStamp!: Date;
-  public songList!: string;
+  public songList!: Song[];
   public assignedUserId!: number;
 
   // associated Volunteer model
   public readonly assignedUser?: User;
+
+  // date it is created:
+  public readonly createdAt!: Date;
 }
 
 export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
@@ -34,12 +41,8 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      timeStamp: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
       songList: {
-        type: DataTypes.STRING,
+        type: DataTypes.JSON,
         allowNull: false,
       },
       assignedUserId: {

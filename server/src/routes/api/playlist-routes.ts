@@ -53,10 +53,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 
 // POST /playlist - Create new playlist
 router.post('/', async (req: Request, res: Response) => {
-  const { title, timeStamp, songList, assignedUserId } = req.body;
+  const { title, songList, assignedUserId } = req.body;
   try {
     const newPlaylist = await Playlist.create({
-      title, timeStamp, songList, assignedUserId
+      title, songList, assignedUserId
     });
     res.status(201).json(newPlaylist);
   } catch (error: any) {
@@ -66,22 +66,22 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-// PUT /Playlists/:id - Update plyalist by ID
+// PUT /Playlists/:id - Update playlist by ID
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { title, timeStamp, songList, assignedUserId } = req.body;
+  const { title, songList, assignedUserId } = req.body;
+  
   try {
-    const plyalist = await Playlist.findByPk(id);
-    if(plyalist) {
-      plyalist.title = title;
-      plyalist.timeStamp = timeStamp;
-      plyalist.songList = songList;
-      plyalist.assignedUserId = assignedUserId;
-      await plyalist.save();
-      res.json(plyalist);
+    const playlist = await Playlist.findByPk(id);
+    if(playlist) {
+      playlist.title = title;
+      playlist.songList = songList;
+      playlist.assignedUserId = assignedUserId;
+      await playlist.save();
+      res.json(playlist);
     } else {
       res.status(404).json({
-        message: 'Plyalist not found'
+        message: 'Playlist not found'
       });
     }
   } catch (error: any) {
@@ -95,9 +95,9 @@ router.put('/:id', async (req: Request, res: Response) => {
 router.delete('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const plyalist = await Playlist.findByPk(id);
-    if(plyalist) {
-      await plyalist.destroy();
+    const playlist = await Playlist.findByPk(id);
+    if(playlist) {
+      await playlist.destroy();
       res.json({ message: 'Playlist deleted' });
     } else {
       res.status(404).json({
