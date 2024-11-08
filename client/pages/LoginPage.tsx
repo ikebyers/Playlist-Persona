@@ -3,6 +3,7 @@ import { login } from '../src/api/authAPI';
 import { UserLogin } from "../src/interfaces/UserLogin";
 import Auth from '../src/utils/auth';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [loginData, setLoginData] = useState<UserLogin>({
@@ -26,7 +27,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const data = await login(loginData);
-      console.log("this data"+data);
+      console.log("this data" + data);
       Auth.login(data.token);
       navigate('/home');
     } catch (err) {
@@ -59,9 +60,11 @@ const LoginPage = () => {
           />
         </div>
         <div className='form-group'>
-          <button className='btn btn-primary' type='submit'>
-            Login
-          </button>
+          <Link to='/home'>
+            <button className='btn btn-primary' type='submit'>
+              Login
+            </button>
+          </Link>
         </div>
       </form>
     </div>
