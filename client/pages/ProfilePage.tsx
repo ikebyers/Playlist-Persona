@@ -2,7 +2,7 @@
 
 const ProfilePage = () => {
     return (
-      <section>
+      <section className="w-75 p-3 container-fluid center">
         <h1>404: Profile page is this</h1>
       </section>
     );

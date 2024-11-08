@@ -1,0 +1,26 @@
+:root {
+    --bs-primary: #4B3B47 !important;
+    --bs-secondary: #6A6B83 !important;
+    --bs-tertiary: #685874 !important;
+    --bs-quaternary: #76949F !important;
+    --bs-success: #9ee1b1 !important;
+    --bs-danger: #e26e61 !important; 
+}
+
+body {
+    background-color: var(--bs-secondary);
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    flex-flow: row;
+}
+
+.button-center {
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+

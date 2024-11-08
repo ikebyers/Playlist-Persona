@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { createUser } from "../src/api/userAPI";
 import { UserData } from "../src/interfaces/UserData";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 const CreateUser = () => {
@@ -58,16 +59,22 @@ const CreateUser = () => {
   //   </>
   // );
   return (
-    <div className='form-container'>
-      <form className='form' onSubmit={handleSubmit}>
-        <input
+  <div className="w-75 p-3 center">
+    <div className="navbarNavAltMarkup">
+      <h1>Create Account</h1>
+    </div>
+    <div className="form-container container-fluid mb-3">
+        <form className='form' onSubmit={handleSubmit}>
+          <input
+          className="form-control container-fluid"
           type="text"
           name="uName"
           value={newUser?.uName ?? ''}
           onChange={handleChange}
-          placeholder="Full Name"
+          placeholder="Name"
         />
         <input
+          className="form-control container-fluid"
           type="email"
           name="email"
           value={newUser?.email ?? ''}
@@ -75,6 +82,7 @@ const CreateUser = () => {
           placeholder="Email"
         />
         <input
+          className="form-control container-fluid"
           type="text"
           name="username"
           value={newUser?.username ?? ''}
@@ -82,14 +90,21 @@ const CreateUser = () => {
           placeholder="Username"
         />
         <input
+          className="form-control container-fluid"
           type="password"
           name="password"
           value={newUser?.password ?? ''}
           onChange={handleChange}
           placeholder="Password"
         />
-        <button type="submit">Create Account</button>
+        <button type="submit" className="rounded-pill btn btn-large">Create Account</button>
+        <div className="text-center mt-5">
+          <NavLink to="/login" className="body-text-tertiary">
+            Already have an account? Login here
+          </NavLink>
+        </div>
       </form>
+    </div>
     </div>
   );
 }

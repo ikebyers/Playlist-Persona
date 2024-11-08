@@ -3,7 +3,7 @@ import { login } from '../src/api/authAPI';
 import { UserLogin } from "../src/interfaces/UserLogin";
 import Auth from '../src/utils/auth';
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const LoginPage = () => {
   const [loginData, setLoginData] = useState<UserLogin>({
@@ -36,37 +36,44 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='form-container'>
+  <div className="w-75 p-3 center">
+    <div className='form-container form-container container-fluid mb-3'>
       <form className='form login-form' onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <div className='form-group'>
-          <label>Username</label>
+        <div className='form-group form'>
           <input
-            className='form-input'
+            className='form-input form-control container-fluid'
             type='text'
             name='username'
             value={loginData.username || ''}
             onChange={handleChange}
+            placeholder="Username"
           />
         </div>
         <div className='form-group'>
-          <label>Password</label>
           <input
-            className='form-input'
+            className='form-input form-control container-fluid'
             type='password'
             name='password'
             value={loginData.password || ''}
             onChange={handleChange}
+            placeholder="Password"
           />
         </div>
         <div className='form-group'>
-          <Link to='/home'>
-            <button className='btn btn-primary' type='submit'>
-              Login
-            </button>
-          </Link>
+        <NavLink to="/home">
+          <button className='rounded-pill btn btn-large' type='submit'>
+            Login
+          </button>
+        </NavLink>
+        <div className="text-center mt-5">
+          <NavLink to="/" className="body-text-tertiary">
+            Don't have an account yet? Create one here
+          </NavLink>
+        </div>
         </div>
       </form>
+    </div>
     </div>
   );
 };

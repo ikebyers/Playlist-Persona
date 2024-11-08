@@ -147,7 +147,7 @@ const HomePage: React.FC = () => {
           </div>
         ))
       ) : (
-        <p>Loading questions...</p>
+        <h4>Loading questions...</h4>
       )}
     </div>
   );
