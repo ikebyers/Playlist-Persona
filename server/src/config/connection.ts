@@ -14,6 +14,7 @@ const sequelize = process.env.DB_URL
         dialect: 'postgres',
         dialectOptions: {
           decimalNumbers: true,
+          charset: 'utf8',
         },
       }
     );
