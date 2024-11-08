@@ -70,6 +70,7 @@ router.post('/', async (req: Request, res: Response) => {
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const { title, songList, assignedUserId } = req.body;
+  
   try {
     const playlist = await Playlist.findByPk(id);
     if(playlist) {
