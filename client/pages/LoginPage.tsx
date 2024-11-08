@@ -1,11 +1,71 @@
-// import React from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { login } from '../src/api/authAPI';
+import { UserLogin } from "../src/interfaces/UserLogin";
+import Auth from '../src/utils/auth';
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-    return (
-      <section>
-        <h1>404: Login page is this</h1>
-      </section>
-    );
+  const [loginData, setLoginData] = useState<UserLogin>({
+    username: '',
+    password: '',
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setLoginData({
+      ...loginData,
+      [name]: value,
+    });
   };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const data = await login(loginData);
+      console.log("this data"+data);
+      Auth.login(data.token);
+      navigate('/home');
+    } catch (err) {
+      console.error('Failed to login', err);
+    }
+  };
+
+  return (
+    <div className='form-container'>
+      <form className='form login-form' onSubmit={handleSubmit}>
+        <h1>Login</h1>
+        <div className='form-group'>
+          <label>Username</label>
+          <input
+            className='form-input'
+            type='text'
+            name='username'
+            value={loginData.username || ''}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='form-group'>
+          <label>Password</label>
+          <input
+            className='form-input'
+            type='password'
+            name='password'
+            value={loginData.password || ''}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='form-group'>
+          <button className='btn btn-primary' type='submit'>
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default LoginPage;
