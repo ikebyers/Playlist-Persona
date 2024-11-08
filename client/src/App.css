@@ -5,31 +5,155 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+:root {
+  --bs-primary: #2e4b40 !important;
+  --bs-secondary:#CBA135 !important;
+  --bs-tertiary: #364259 !important;
+  --bs-quaternary: #DD614A !important;
+  --bs-danger: #e26e61 !important; 
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  background-color: var(--bs-primary);
+  background: linear-gradient(270deg, #2e4b40, #1e2120);
+  font-family: 'PT Mono', 'Courier New', Courier, monospace;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+
+nav {
+  background-color: var(--bs-secondary);
+  flex-flow: nowrap;
+}
+.body-text {
+  color: white
+}
+
+.body-text-alt {
+  color: #DD614A
+}
+
+.body-text-tertiary {
+  color: #CBA135
+}
+
+.navbar {
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(90deg, #CBA135, #a9a8a3);
+}
+
+.navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  padding: 0rem 0;
+  justify-content: space-between !important;
+}
+
+.nav-link.active {
+  background-color: #f0f0f0 !important; /* Change this color to your desired highlight color */
+  color: #333 !important; /* Adjust this to the color you want for the active text */
+  border: none; /* Remove border if there's any */
+}
+
+
+.nav-link {
+  color: #333 !important; /* text color */
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-link:hover {
+  color: #555 !important; /* set text hover color */
+  transform: translateY(1px);    /* Subtle press effect */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Reduced shadow on press */
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  flex-flow: row;
+}
+
+h1 {
+  color:darkgoldenrod;
+  margin: 1rem;
+}
+
+h4 {
+  color:darkgoldenrod;
+  margin: 5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  background-color: #DD614A;
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-large {
+  padding: 15px 30px;         
+  font-size: 1.25rem;     
+  border-radius: 15px;   
+  background-color: #DD614A;  
+  color: #fff;            
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition */
+}
+
+.btn-large:hover {
+  background-color: #CBA135; 
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+}
+
+.btn-medium {
+  padding: 10px 20px;
+  font-size: 1rem;          /* Increase font size */
+  border-radius: 10px;         /* Rounds the corners */
+  background-color: #DD614A;   /* Adjust button color as needed */
+  color: #fff;                 /* Text color */
+  border: none;                /* Remove border */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition */
+  margin: .5rem;
+  margin-bottom: 2rem;
+} 
+
+.btn-medium:hover {
+  background-color: #CBA135; 
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+} 
+
+.btn-large:active {
+  transform: translateY(1px); /* Subtle press effect */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Reduced shadow on press */
+}
+
+input {
+  margin: 2rem;
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+}
+
+.button-center {
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+@media (max-width: 991px) {
+  .navbar-nav {
+      flex-direction: column !important; /* Force vertical on smaller screens */
+      align-items: center; /* Center items in the dropdown */
+  }
+
+  .navbar-collapse {
+      text-align: center;
+  }
+
+  .nav-link {
+      margin-bottom: 0.5rem; /* Add space between links */
+      width: 100%; /* Full width for each link on small screens */
   }
 }
 
