@@ -15,7 +15,8 @@ const HomePage: React.FC = () => {
     const fetchQuestions = async () => {
       try {
         console.log("This where i am");
-        const response = await fetch("http://localhost:3001/api/questions");
+        const response = await fetch("http://localhost:3001/questions", {
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch questions");
@@ -128,20 +129,20 @@ const HomePage: React.FC = () => {
             )}
             {index === questions.length - 1 ? (
               <Link to='/CurrentPlaylist'>
-              <button
-              // onClick={handleSubmit}
-              disabled={!isNextEnabled()}
-              >
-                Generate Playlist
+                <button
+                  // onClick={handleSubmit}
+                  disabled={!isNextEnabled()}
+                >
+                  Generate Playlist
                 </button>
-                </Link>
+              </Link>
             ) : (
-            <button
-              onClick={handleNextQuestion}
-              disabled={!isNextEnabled()} // Disable button if no valid answer
-            >
-              Next
-            </button>
+              <button
+                onClick={handleNextQuestion}
+                disabled={!isNextEnabled()} // Disable button if no valid answer
+              >
+                Next
+              </button>
             )}
           </div>
         ))

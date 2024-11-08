@@ -27,7 +27,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const data = await login(loginData);
-      console.log("this data"+data);
+      console.log("this data" + data);
       Auth.login(data.token);
       navigate('/home');
     } catch (err) {
@@ -61,9 +61,11 @@ const LoginPage = () => {
           />
         </div>
         <div className='form-group'>
+        <NavLink to="/home">
           <button className='rounded-pill btn btn-large' type='submit'>
             Login
           </button>
+        </NavLink>
         <div className="text-center mt-5">
           <NavLink to="/" className="body-text-tertiary">
             Don't have an account yet? Create one here

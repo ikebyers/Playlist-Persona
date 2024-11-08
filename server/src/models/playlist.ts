@@ -4,6 +4,7 @@ import { User } from './user.js';
 interface Song {
   title: string;
   artist: string;
+  url: string;
 }
 
 interface PlaylistAttributes {
