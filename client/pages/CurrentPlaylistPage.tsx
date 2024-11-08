@@ -3,7 +3,7 @@
 const CurrentPlaylistPage = () => {
     return (
       <section>
-        <h1>404: Current Playlist Page Not Found</h1>
+        <h1>404: This is Current Playlist Page</h1>
       </section>
     );
   };
