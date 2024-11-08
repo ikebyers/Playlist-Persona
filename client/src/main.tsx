@@ -10,6 +10,7 @@ import HomePage from '../pages/HomePage.tsx';
 import LoginPage from '../pages/LoginPage.tsx';
 import ProfilePage from '../pages/ProfilePage.tsx';
 import CurrentPlaylistPage from '../pages/CurrentPlaylistPage.tsx';
+import CreateUser from '../pages/CreateUserPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      {path: '/', element: <LoginPage/>},
+      {path: '/', element: <CreateUser/>},
+      {path: '/login', element: <LoginPage/>},
       {path: '/home', element: <HomePage/>},
       {path: '/profile', element: <ProfilePage/>},
       {path: '/error', element: <ErrorPage/>},
