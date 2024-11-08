@@ -37,7 +37,7 @@ app.use(cors({ origin: 'http://localhost:3000'}));
 //     res.json({ questions });
 // });
 
-app.get('/api/questions', async (_req: Request, res: Response) => {
+app.get('/questions', async (_req: Request, res: Response) => {
     const questions = await generateQuestions();
     res.json({ questions });
 });
