@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Question {
   question: string;
@@ -80,6 +81,13 @@ const HomePage: React.FC = () => {
     }
   };
 
+  // const handleSubmit = () => {
+  //   const navigate = useNavigate();
+  //   // localStorage.setItem("answers", JSON.stringify(Object.values(responses)));
+  //   console.log("SUBMITTING")
+  //   navigate("/currentPlaylistPage.tsx");
+  // };
+
   // const allAnswered = questions.length > 0 && Object.keys(responses).length === questions.length;
 
   return (
@@ -118,12 +126,23 @@ const HomePage: React.FC = () => {
                 value={responses[index] || ""}
               />
             )}
+            {index === questions.length - 1 ? (
+              <Link to='/CurrentPlaylist'>
+              <button
+              // onClick={handleSubmit}
+              disabled={!isNextEnabled()}
+              >
+                Generate Playlist
+                </button>
+                </Link>
+            ) : (
             <button
               onClick={handleNextQuestion}
               disabled={!isNextEnabled()} // Disable button if no valid answer
             >
               Next
             </button>
+            )}
           </div>
         ))
       ) : (
