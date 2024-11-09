@@ -15,8 +15,7 @@ const HomePage: React.FC = () => {
     const fetchQuestions = async () => {
       try {
         console.log("This where i am");
-        const response = await fetch("http://localhost:3001/questions", {
-        });
+        const response = await fetch("http://localhost:3001/questions", {});
 
         if (!response.ok) {
           throw new Error("Failed to fetch questions");
@@ -101,49 +100,63 @@ const HomePage: React.FC = () => {
               display: index === currentQuestionIndex ? "block" : "none",
             }}
           >
-            <h2>{question.question}</h2>
-            {question.answers && question.answers.length > 0 ? (
-              // Render multiple-choice options
-              <div>
-                {question.answers.map((answer: string, answerIndex: number) => (
-                  <label key={answerIndex}>
-                    <input
-                      type="checkbox"
-                      name={`question-${index}`}
-                      value={answer}
-                      onChange={() => handleResponseChange(index, answer)}
-                      checked={responses[index] === answer}
-                    />
-                    {answer}
-                  </label>
-                ))}
-              </div>
-            ) : (
-              // Render short-answer text area
-              <input
-                type="text"
-                placeholder="Your answer"
-                onChange={(e) => handleResponseChange(index, e.target.value)}
-                value={responses[index] || ""}
-              />
-            )}
-            {index === questions.length - 1 ? (
-              <Link to='/CurrentPlaylist'>
-                <button
-                  // onClick={handleSubmit}
-                  disabled={!isNextEnabled()}
+            <div className="card mx-auto card-margin card-color">
+              <h2 className="mx-auto p-3 body-text-primary">
+                {question.question}
+              </h2>
+              {question.answers && question.answers.length > 0 ? (
+                <ul
+                  className="row gx-2"
+                  style={{ listStyleType: "none", padding: 0 }}
                 >
-                  Generate Playlist
+                  {question.answers.map(
+                    (answer: string, answerIndex: number) => (
+                      <li
+                        key={answerIndex}
+                        className="col-6 col-md-4 d-flex align-items-center mb-1 body-text-primary"
+                      >
+                        <input
+                          type="checkbox"
+                          name={`question-${index}`}
+                          value={answer}
+                          onChange={() => handleResponseChange(index, answer)}
+                          checked={responses[index] === answer}
+                          className="me-2 checkbox form-check-input"
+                        />
+                        <label>{answer}</label>
+                      </li>
+                    )
+                  )}
+                </ul>
+              ) : (
+                // Render short-answer text area
+                <input
+                  type="text"
+                  placeholder="Your answer"
+                  onChange={(e) => handleResponseChange(index, e.target.value)}
+                  value={responses[index] || ""}
+                />
+              )}
+              {index === questions.length - 1 ? (
+                <Link to="/CurrentPlaylist">
+                  <button
+                    className="btn-large w-50 p-3 center"
+                    // onClick={handleSubmit}
+                    disabled={!isNextEnabled()}
+                  >
+                    Generate Playlist
+                  </button>
+                </Link>
+              ) : (
+                <button
+                  className="btn-large w-25 p-3 center"
+                  onClick={handleNextQuestion}
+                  disabled={!isNextEnabled()} // Disable button if no valid answer
+                >
+                  Next
                 </button>
-              </Link>
-            ) : (
-              <button
-                onClick={handleNextQuestion}
-                disabled={!isNextEnabled()} // Disable button if no valid answer
-              >
-                Next
-              </button>
-            )}
+              )}
+            </div>
           </div>
         ))
       ) : (

@@ -24,8 +24,23 @@ nav {
   background-color: var(--bs-secondary);
   flex-flow: nowrap;
 }
+
+/* li {
+  margin: 0 !important;
+  flex-wrap: nowrap;
+  flex-flow: row;
+} */
+
+.checkbox {
+  box-shadow: none;
+}
+
 .body-text {
   color: white
+}
+
+.body-text-primary {
+  color: #2e4b40;
 }
 
 .body-text-alt {
@@ -85,9 +100,27 @@ h4 {
   align-items: center;
 }
 
+.card-color {
+  background-color: #e1cfb9;
+}
+
+.card-color-alt {
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(270deg, #CBA135, #a9a8a3);
+}
+
+.card-margin {
+  margin: 1.5rem;
+}
+
 button {
   background-color: #DD614A;
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
 }
 
 .btn-large {
