@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import auth from "../src/utils/auth";
 
 interface Question {
   question: string;
@@ -10,6 +11,18 @@ const HomePage: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [responses, setResponses] = useState<{ [key: number]: string }>({});
+  const [loginCheck, setLoginCheck] = useState(false);
+
+  const checkLogin = () => {
+    if (auth.loggedIn()) {
+      setLoginCheck(true);
+    }
+  };
+
+  useEffect(() => {
+    console.log(loginCheck);
+    checkLogin();
+  }, [loginCheck]);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -92,75 +105,81 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      {Array.isArray(questions) && questions.length > 0 ? (
-        questions.map((question, index) => (
-          <div
-            key={index}
-            style={{
-              display: index === currentQuestionIndex ? "block" : "none",
-            }}
-          >
-            <div className="card mx-auto card-margin card-color">
-              <h2 className="mx-auto p-3 body-text-primary">
-                {question.question}
-              </h2>
-              {question.answers && question.answers.length > 0 ? (
-                <ul
-                  className="row gx-2"
-                  style={{ listStyleType: "none", padding: 0 }}
-                >
-                  {question.answers.map(
-                    (answer: string, answerIndex: number) => (
-                      <li
-                        key={answerIndex}
-                        className="col-6 col-md-4 d-flex align-items-center mb-1 body-text-primary"
-                      >
-                        <input
-                          type="checkbox"
-                          name={`question-${index}`}
-                          value={answer}
-                          onChange={() => handleResponseChange(index, answer)}
-                          checked={responses[index] === answer}
-                          className="me-2 checkbox form-check-input"
-                        />
-                        <label>{answer}</label>
-                      </li>
-                    )
+      {loginCheck ? (
+        <div>
+          {Array.isArray(questions) && questions.length > 0 ? (
+            questions.map((question, index) => (
+              <div
+                key={index}
+                style={{
+                  display: index === currentQuestionIndex ? "block" : "none",
+                }}
+              >
+                <div className="card mx-auto card-margin card-color">
+                  <h2 className="mx-auto p-3 body-text-primary">
+                    {question.question}
+                  </h2>
+                  {question.answers && question.answers.length > 0 ? (
+                    <ul
+                      className="row gx-2"
+                      style={{ listStyleType: "none", padding: 0 }}
+                    >
+                      {question.answers.map(
+                        (answer: string, answerIndex: number) => (
+                          <li
+                            key={answerIndex}
+                            className="col-6 col-md-4 d-flex align-items-center mb-1 body-text-primary"
+                          >
+                            <input
+                              type="checkbox"
+                              name={`question-${index}`}
+                              value={answer}
+                              onChange={() => handleResponseChange(index, answer)}
+                              checked={responses[index] === answer}
+                              className="me-2 checkbox form-check-input"
+                            />
+                            <label>{answer}</label>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  ) : (
+                    // Render short-answer text area
+                    <input
+                      type="text"
+                      placeholder="Your answer"
+                      onChange={(e) => handleResponseChange(index, e.target.value)}
+                      value={responses[index] || ""}
+                    />
                   )}
-                </ul>
-              ) : (
-                // Render short-answer text area
-                <input
-                  type="text"
-                  placeholder="Your answer"
-                  onChange={(e) => handleResponseChange(index, e.target.value)}
-                  value={responses[index] || ""}
-                />
-              )}
-              {index === questions.length - 1 ? (
-                <Link to="/CurrentPlaylist">
-                  <button
-                    className="btn-large w-50 p-3 center"
-                    // onClick={handleSubmit}
-                    disabled={!isNextEnabled()}
-                  >
-                    Generate Playlist
-                  </button>
-                </Link>
-              ) : (
-                <button
-                  className="btn-large w-25 p-3 center"
-                  onClick={handleNextQuestion}
-                  disabled={!isNextEnabled()} // Disable button if no valid answer
-                >
-                  Next
-                </button>
-              )}
-            </div>
-          </div>
-        ))
+                  {index === questions.length - 1 ? (
+                    <Link to="/CurrentPlaylist">
+                      <button
+                        className="btn-large w-50 p-3 center"
+                        // onClick={handleSubmit}
+                        disabled={!isNextEnabled()}
+                      >
+                        Generate Playlist
+                      </button>
+                    </Link>
+                  ) : (
+                    <button
+                      className="btn-large w-25 p-3 center"
+                      onClick={handleNextQuestion}
+                      disabled={!isNextEnabled()} // Disable button if no valid answer
+                    >
+                      Next
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))
+          ) : (
+            <h4>Loading questions...</h4>
+          )}
+        </div>
       ) : (
-        <h4>Loading questions...</h4>
+        <h1> You are not logged in! Please Log In to view this page</h1>
       )}
     </div>
   );

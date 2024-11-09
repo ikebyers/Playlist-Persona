@@ -2,7 +2,6 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { login } from '../src/api/authAPI';
 import { UserLogin } from "../src/interfaces/UserLogin";
 import Auth from '../src/utils/auth';
-import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const LoginPage = () => {
@@ -11,7 +10,6 @@ const LoginPage = () => {
     password: '',
   });
 
-  const navigate = useNavigate();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -29,7 +27,6 @@ const LoginPage = () => {
       const data = await login(loginData);
       console.log("this data" + data);
       Auth.login(data.token);
-      navigate('/home');
     } catch (err) {
       console.error('Failed to login', err);
     }
@@ -61,11 +58,9 @@ const LoginPage = () => {
           />
         </div>
         <div className='form-group'>
-        <NavLink to="/home">
           <button className='rounded-pill btn btn-large' type='submit'>
             Login
           </button>
-        </NavLink>
         <div className="text-center mt-5">
           <NavLink to="/" className="body-text-tertiary">
             Don't have an account yet? Create one here
