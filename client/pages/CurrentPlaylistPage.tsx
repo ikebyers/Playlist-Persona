@@ -81,17 +81,17 @@ const CurrentPlaylist: React.FC = () => {
   };
 
   return (
-    <div className="w-75 p-3 container-fluid center body-text">
-      <div>
-        <h1>Your Playlist</h1>
-          <p className="body-text-alt">Based on your responses we currated this playlist just for you! Feel free to check out the music and save the playlist to your profile to listen later.</p>
+    <div className="w-100 mx-auto p-3 container-fluid center body-text">
+      <div className="card card-margin card-color-alt">
+        <h1 className="body-text-primary">Your Playlist</h1>
+          <p className="body-text-primary">Based on your responses we currated this playlist just for you! Feel free to check out the music and save the playlist to your profile to listen later.</p>
       </div>
       {loading ? (
         <h4>Loading your playlist...</h4>
       ) : playlist.length > 0 ? (
         <div className="p-3 center">
           {playlist.map((song, index) => (
-            <div key={index}>
+            <div className="card card-margin card-color" key={index}>
               {/* <img src={song.thumbnailUrl} alt={`${song.title} thumbnail`} width="120" height="90" /> */}
               <iframe
               className="w-100 p-3 container-fluid center"
@@ -101,8 +101,10 @@ const CurrentPlaylist: React.FC = () => {
               ></iframe>
               <h3>{song.songTitle}</h3>
               <h5>Artist: {song.artistName}</h5>
+              <div className="btn-group">
               <button className="btn-medium" onClick={() => handlePlay(song.url)}>Play</button>
               <button className="btn-medium" onClick={handleStop}>Stop</button>
+              </div>
               {currentSong === song.url && (
                 <YouTube videoId={song.url} opts={playerOptions} />
               )}

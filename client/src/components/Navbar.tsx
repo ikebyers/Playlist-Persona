@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Nav = () => {
     return (
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar navbar-expand-lg rounded">
             <div className="container-fluid">
                 {/* App name */}
                 <div className="ms-2">
