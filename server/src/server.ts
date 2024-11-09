@@ -1,12 +1,13 @@
+const forceDatabaseRefresh = false;
+
 import express, { Request, Response } from "express";
 import routes from "./routes/index.js";
 import { generatePlaylist, generateQuestions } from "./services/gptServices.js";
 import { searchSong } from "./services/youtubeServices.js";
 import cors from "cors";
 import sequelize from "./config/connection.js";
+// const cors = require('cors');
 // import app from "./app.js";
-
-const forceDatabaseRefresh = false;
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -22,6 +23,7 @@ sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
     console.log(`Server is listening on port ${port}`);
   });
 });
+
 
 app.use(cors({ origin: "http://localhost:3000" }));
 

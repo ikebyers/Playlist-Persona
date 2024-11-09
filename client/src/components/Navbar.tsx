@@ -1,21 +1,36 @@
 import { NavLink } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import auth from "../utils/auth";
+import { useState, useEffect } from "react";
 
 const Nav = () => {
+    const [loginCheck, setLoginCheck] = useState(false);
+
+    const checkLogin = () => {
+        if (auth.loggedIn()) {
+            setLoginCheck(true);
+        }
+    };
+
+    useEffect(() => {
+        console.log(loginCheck);
+        checkLogin();
+    }, [loginCheck]);
+
     return (
         <nav className="navbar navbar-expand-lg rounded">
             <div className="container-fluid">
                 {/* App name */}
                 <div className="ms-2">
                     <NavLink className="navbar-brand fw-bold" to="/" style={{ color: '#2e4b40', fontSize: '1.5rem' }}>
-                    <img className="justify-content-center"
-                    src="/assets/pp-rf-logo.svg"
-                    style={{ height: '65px', marginRight: '8px' }} />
-                    Playlist Persona</NavLink>
+                        <img className="justify-content-center"
+                            src="/assets/pp-rf-logo.svg"
+                            style={{ height: '65px', marginRight: '8px' }} />
+                        Playlist Persona</NavLink>
                 </div>
 
                 {/* Toggler Button for Mobile View */}
-                <button 
+                <button
                     className="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
@@ -37,9 +52,15 @@ const Nav = () => {
                                     Create Account
                                 </NavLink>
                             </div>
-                            <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/login">
-                                Login
-                            </NavLink>
+                            {loginCheck ? (
+                                <NavLink type="button" className="nav-link rounded-pill btn btn-light" onClick={() => { auth.logout(); }} to="/login">
+                                    Logout
+                                </NavLink>
+                            ) : (
+                                <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/login">
+                                    Login
+                                </NavLink>
+                            )}
                             <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/home">
                                 Home
                             </NavLink>

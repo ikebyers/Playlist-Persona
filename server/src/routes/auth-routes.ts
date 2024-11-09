@@ -12,6 +12,9 @@ export const login = async (req: Request, res: Response) => {
   if (!user) {
     return res.status(401).json({ message: 'Authentication failed' });
   }
+  const id = user.id;
+  const uName = user.uName;
+  const email = user.email;
 
   const passwordIsValid = await bcrypt.compare(password, user.password);
   if (!passwordIsValid) {
@@ -20,7 +23,7 @@ export const login = async (req: Request, res: Response) => {
 
   const secretKey = process.env.JWT_SECRET_KEY || '';
 
-  const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
+  const token = jwt.sign({ id, username, uName, email }, secretKey, { expiresIn: '1h' });
   return res.json({ token });
 };
 

@@ -7,7 +7,6 @@ const retrieveUsers = async () => {
     const response = await fetch('/api/users', {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${Auth.getToken()}`,
       }
     });
     const data = await response.json();
@@ -50,7 +49,6 @@ const createUser = async (body: UserData): Promise<UserData> => {
         method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${Auth.getToken()}`,
           },
         body: JSON.stringify(body)
       }
