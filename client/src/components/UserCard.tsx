@@ -27,7 +27,7 @@ const UserCard = ({
       }
     }
   };
-
+console.log("I am in the user card: "+ id)
   return (
     <div className="u-card container-fluid card mx-auto card-color d-flex flex-column align-items-center justify-content-center">
       <div className="mt-4">

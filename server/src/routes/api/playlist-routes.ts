@@ -24,6 +24,38 @@ router.get('/', async (_req: Request, res: Response) => {
   }
 });
 
+
+// GET /playlist/user/:userId - Get all playlists by user ID
+router.get('/user/:userId', async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const playlists = await Playlist.findAll({
+      where: {
+        assignedUserId: userId, // Filter by the foreign key
+      },
+      include: [
+        {
+          model: User,
+          as: 'assignedUser', // This should match the alias defined in the association
+          attributes: ['uName'], // Include only the uName attribute
+        },
+      ],
+    });
+
+    if (playlists.length > 0) {
+      res.json(playlists);
+    } else {
+      res.status(404).json({
+        message: 'No playlists found for this user'
+      });
+    }
+  } catch (error: any) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
+});
+
 // GET /playlist/:id - Get work by user ID
 router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
