@@ -31,7 +31,7 @@ const Nav = () => {
 
                 {/* Toggler Button for Mobile View */}
                 <button
-                    className="navbar-toggler"
+                    className="navbar-toggler btn-nav-color body-text-alt"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup"
@@ -48,25 +48,25 @@ const Nav = () => {
                     <div className="navbar-nav container-fluid d-flex flex-row mx-auto align-items-center justify-content-between gap-3">
                         <div className="nav nav-pills nav-fill ms-auto gap-lg-3 gap-3 p-3 d-flex flex-row">
                             <div className="nav-item">
-                                <NavLink className="nav-link rounded-pill btn btn-light" to="/">
+                                <NavLink className="nav-link rounded-pill btn btn-light" to="/createAccount">
                                     Create Account
                                 </NavLink>
                             </div>
                             {loginCheck ? (
-                                <NavLink type="button" className="nav-link rounded-pill btn btn-light" onClick={() => { auth.logout(); }} to="/login">
+                                <NavLink type="button" className="nav-link rounded-pill btn btn-light" onClick={() => { auth.logout(); }} to="/">
                                     Logout
                                 </NavLink>
                             ) : (
-                                <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/login">
+                                <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/">
                                     Login
                                 </NavLink>
                             )}
-                            <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/home">
-                                Home
+                            <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/generatePlaylist">
+                                Generate Playlist
                             </NavLink>
-                            <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/currentPlaylist">
+                            {/* <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/currentPlaylist">
                                 Current Playlist
-                            </NavLink>
+                            </NavLink> */}
                             <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/profile">
                                 Profile
                             </NavLink>
