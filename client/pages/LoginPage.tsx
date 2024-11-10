@@ -37,7 +37,6 @@ const LoginPage = () => {
   <div className="w-75 p-3 center">
     <div className='form-container form-container container-fluid mb-3'>
       <form className='form login-form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
 
         {error && <p className="error">{error}</p>}
 
