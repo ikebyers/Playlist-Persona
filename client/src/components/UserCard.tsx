@@ -1,16 +1,21 @@
-import {ApiMessage } from '../interfaces/ApiMessage'
+import { ApiMessage } from "../interfaces/ApiMessage";
 import { MouseEventHandler } from "react";
 
 interface UserCardProps {
-  id: number | null,
-  username: string | null,
-  name: string | null,
-  email: string | null,
-  deleteIndvUser: (ticketId: number) => Promise<ApiMessage>
+  id: number | null;
+  username: string | null;
+  name: string | null;
+  email: string | null;
+  deleteIndvUser: (ticketId: number) => Promise<ApiMessage>;
 }
 
-const UserCard = ({id, username, name, email, deleteIndvUser}:UserCardProps) => {
-
+const UserCard = ({
+  id,
+  username,
+  name,
+  email,
+  deleteIndvUser,
+}: UserCardProps) => {
   const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
     const userId = Number(event.currentTarget.value);
     if (!isNaN(userId)) {
@@ -18,18 +23,38 @@ const UserCard = ({id, username, name, email, deleteIndvUser}:UserCardProps) => 
         const data = await deleteIndvUser(userId);
         return data;
       } catch (error) {
-        console.error('Failed to delete ticket:', error);
+        console.error("Failed to delete ticket:", error);
       }
     }
   };
 
   return (
-    <div className='u-card'>
-      <h3>User ID: {id} </h3>
-      <h4>User Name: {username}</h4>
-      <h4>User Name: {name}</h4>
-      <h4>User Name: {email}</h4>
-      <button value={String(id)} onClick={handleDelete}>Delete</button>
+    <div className="u-card container-fluid card mx-auto card-color d-flex flex-column align-items-center justify-content-center">
+      <div className="mt-4">
+        <h5>
+          <span className="fst-italic">User ID: </span>
+          <span className="body-text-alt">{id}</span>
+        </h5>
+        <h5>
+          <span className="fst-italic">Username: </span>
+          <span className="body-text-alt">{username}</span>
+        </h5>
+        <h5>
+          <span className="fst-italic">Name: </span>
+          <span className="body-text-alt">{name}</span>
+        </h5>
+        <h5>
+          <span className="fst-italic">Email: </span>
+          <span className="body-text-alt">{email}</span>
+        </h5>
+        <button
+          className="btn-medium w-50 mx-auto center"
+          value={String(id)}
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
