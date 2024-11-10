@@ -10,7 +10,6 @@ interface Song {
 const CurrentPlaylist: React.FC = () => {
   const [playlist, setPlaylist] = useState<Song[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentSong, setCurrentSong] = useState<string | null>(null);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
   useEffect(() => {
@@ -44,16 +43,12 @@ const CurrentPlaylist: React.FC = () => {
           songTitle: song.songTitle,
           artistName: song.artistName,
           url: song.url,
-          // thumbnailUrl: song.thumbnailUrl || song.snippet?.thumbnails?.default?.url
         }));
         console.log(typeof transformedPlaylist);
         localStorage.setItem(
           "currentPlaylist",
           JSON.stringify(transformedPlaylist)
         );
-        // transformedPlaylist.forEach((element: Song) => {
-        //   console.log("transformed playlist:", element.songTitle, element.artistName, element.url);
-        // });
         setPlaylist(transformedPlaylist);
       } catch (error) {
         console.error("Error fetching playlist:", error);
@@ -65,28 +60,8 @@ const CurrentPlaylist: React.FC = () => {
     fetchPlaylist();
   }, []);
 
-  // const handlePlay = async (index: number, event: Event) => {
-  //   const iframe = document.getElementById(`iframe-${index}`);
-  //   const button = document.getElementById(`button-${index}`);
-  // //   button?.addEventListener();
-  // //   setCurrentSong(videoId);
-  //     iframe.contentWindow.document.getElementById("toggleDivButton").click();
-  // };
-
-  // const handleStop = () => {
-  //   setCurrentSong(null);
-  // };
-
   const toggleCard = (index: number) => {
     setExpandedCard(expandedCard === index ? null : index);
-  };
-
-  const playerOptions = {
-    height: "0", // Minimize height to simulate audio-only
-    width: "0", // Minimize width to simulate audio-only
-    playerVars: {
-      autoplay: 0,
-    },
   };
 
   return (
@@ -134,9 +109,6 @@ const CurrentPlaylist: React.FC = () => {
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                   ></iframe>
-                  {currentSong === song.url && (
-                    <YouTube videoId={song.url} opts={playerOptions} />
-                  )}
                 </div>
               )}
             </div>
