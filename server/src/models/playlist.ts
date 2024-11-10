@@ -48,7 +48,7 @@ export function PlaylistFactory(sequelize: Sequelize): typeof Playlist {
       },
       assignedUserId: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
     },
     {
