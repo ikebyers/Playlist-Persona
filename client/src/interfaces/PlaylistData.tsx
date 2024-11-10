@@ -1,8 +1,7 @@
-import { UserData } from "./UserData";
-
-interface Song {
-  title: string;
-  artist: string;
+export interface Song {
+  songTitle: string;
+  artistName: string;
+  url: string;
 }
 
 export interface PlaylistData {
@@ -10,5 +9,4 @@ export interface PlaylistData {
     title: string | null;
     songList: Song[] | null;
     assignedUserId: number | null;
-    assignedUser: UserData | null;
   }

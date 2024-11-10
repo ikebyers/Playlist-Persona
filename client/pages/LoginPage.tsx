@@ -9,7 +9,7 @@ const LoginPage = () => {
     username: '',
     password: '',
   });
-
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -29,6 +29,7 @@ const LoginPage = () => {
       Auth.login(data.token);
     } catch (err) {
       console.error('Failed to login', err);
+      setError('Invalid username or password');
     }
   };
 
@@ -36,6 +37,9 @@ const LoginPage = () => {
   <div className="w-75 p-3 center">
     <div className='form-container form-container container-fluid mb-3'>
       <form className='form login-form' onSubmit={handleSubmit}>
+
+        {error && <p className="error">{error}</p>}
+
         <h1 className="fw-bold">Login</h1>
         <div className='form-group form'>
           <input

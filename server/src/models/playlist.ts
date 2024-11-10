@@ -2,8 +2,8 @@ import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 import { User } from './user.js';
 
 interface Song {
-  title: string;
-  artist: string;
+  songTitle: string;
+  artistName: string;
   url: string;
 }
 
