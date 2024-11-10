@@ -44,6 +44,7 @@ const CurrentPlaylist: React.FC = () => {
   // Function to handle saving the playlist
   const handleSavePlaylist = (event: FormEvent) => {
     event.preventDefault();
+    // console.log(songListFromStorage);
     console.log(JSON.stringify(newPlaylist));
 
     if (newPlaylist) {
@@ -79,13 +80,16 @@ const CurrentPlaylist: React.FC = () => {
         }
 
         const data = await response.json();
+        // console.log("data before transforming", data);
+        // setPlaylist(data);
+
         const transformedPlaylist = data.map((song: Song) => ({
           songTitle: song.songTitle,
           artistName: song.artistName,
           url: song.url,
         }));
 
-        console.log(typeof (transformedPlaylist));
+        // console.log(typeof(transformedPlaylist));
         localStorage.setItem("currentPlaylist", JSON.stringify(transformedPlaylist));
 
         setPlaylist(transformedPlaylist);
@@ -99,11 +103,9 @@ const CurrentPlaylist: React.FC = () => {
     fetchPlaylist();
   }, []);
 
-
   const toggleCard = (index: number) => {
     setExpandedCard(expandedCard === index ? null : index);
   };
-
 
  return (
     <div>
@@ -175,7 +177,6 @@ const CurrentPlaylist: React.FC = () => {
                                             referrerPolicy="strict-origin-when-cross-origin"
                                             allowFullScreen
                                         ></iframe>
-                                
                                     </div>
                                 )}
                             </div>
