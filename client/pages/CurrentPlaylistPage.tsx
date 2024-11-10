@@ -109,14 +109,6 @@ const CurrentPlaylist: React.FC = () => {
     setExpandedCard(expandedCard === index ? null : index);
   };
 
-  // const playerOptions = {
-  //   height: "0", // Minimize height to simulate audio-only
-  //   width: "0", // Minimize width to simulate audio-only
-  //   playerVars: {
-  //     autoplay: 0,
-  //   },
-  // };
-
  return (
     <div>
         {loginCheck ? (
@@ -187,9 +179,6 @@ const CurrentPlaylist: React.FC = () => {
                                             referrerPolicy="strict-origin-when-cross-origin"
                                             allowFullScreen
                                         ></iframe>
-                                        {/* {currentSong === song.url && (
-                                            <YouTube videoId={song.url} opts={playerOptions} />
-                                        )} */}
                                     </div>
                                 )}
                             </div>
