@@ -31,6 +31,10 @@ nav {
   flex-flow: row;
 } */
 
+.error {
+  color: red;
+}
+
 .checkbox {
   box-shadow: none;
 }

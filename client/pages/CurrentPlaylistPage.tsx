@@ -46,7 +46,7 @@ const CurrentPlaylist: React.FC = () => {
           url: song.url,
           // thumbnailUrl: song.thumbnailUrl || song.snippet?.thumbnails?.default?.url
         }));
-        console.log(typeof(transformedPlaylist));
+        // console.log(typeof(transformedPlaylist));
         localStorage.setItem("currentPlaylist", JSON.stringify(transformedPlaylist));
         // transformedPlaylist.forEach((element: Song) => {
         //   console.log("transformed playlist:", element.songTitle, element.artistName, element.url);
