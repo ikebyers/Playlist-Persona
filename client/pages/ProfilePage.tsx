@@ -68,8 +68,9 @@ const ProfilePage = () => {
   }
   else {
     return (
-      <div className='user-list'>
+      <div className='user-list container-fluid card-margin mx-auto p-3 w-75'>
         {user ? (
+          <div className="card-justify-align card">
           <UserCard
             key={user.id}
             id={user.id}
@@ -78,11 +79,15 @@ const ProfilePage = () => {
             email={user.email}
             deleteIndvUser={deleteIndvUser}
           />
+          </div>
         ) : (
           <div>
-            <h1>
-              Could not retrieve Users to display! Please Log In to view this page.
-            </h1>
+            <h3 className="mx-auto p-3 body-text-alt fw-bold">
+              No user to display!
+            </h3>
+            <h3 className="mx-auto p-3 body-text-alt fst-italic">
+              Please log in to view this page.
+            </h3>
           </div>
         )
         }

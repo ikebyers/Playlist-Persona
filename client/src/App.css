@@ -109,6 +109,11 @@ h4 {
   background: linear-gradient(270deg, #CBA135, #a9a8a3);
 }
 
+.card-justify-align {
+  justify-content: center;
+  align-items: center;
+}
+
 .card-margin {
   margin: 1.5rem;
 }
@@ -123,6 +128,16 @@ button {
   justify-content: center;
 }
 
+/* .btn-nav-color {
+  background-color: #CBA135  
+} */
+
+.btn-nav-color:hover {
+  /* background-color: #CBA135;  */
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+}
+
 .btn-large {
   padding: 15px 30px;         
   font-size: 1.25rem;     
@@ -131,7 +146,11 @@ button {
   color: #fff;            
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
   transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition */
+  margin: .5rem;
+  margin-bottom: 2rem;
 }
+
+
 
 .btn-large:hover {
   background-color: #CBA135; 
@@ -152,7 +171,25 @@ button {
   margin-bottom: 2rem;
 } 
 
+.btn-medium-alt {
+  padding: 10px 20px;
+  font-size: 1rem;          /* Increase font size */
+  border-radius: 10px;         /* Rounds the corners */
+  background-color: #DD614A;   /* Adjust button color as needed */
+  color: #fff;                 /* Text color */
+  border: none;                /* Remove border */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition */
+  margin: .5rem;
+} 
+
 .btn-medium:hover {
+  background-color: #CBA135; 
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+} 
+
+.btn-medium-alt:hover {
   background-color: #CBA135; 
   transform: translateY(-2px); /* Slight lift on hover */
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
@@ -191,7 +228,8 @@ input {
 }
 
 .card {
-  padding: 2em;
+  padding: .25rem;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 .read-the-docs {
