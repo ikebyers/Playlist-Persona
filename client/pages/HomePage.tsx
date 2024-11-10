@@ -164,7 +164,7 @@ const HomePage: React.FC = () => {
                     </Link>
                   ) : (
                     <button
-                      className="btn-large w-25 p-3 center"
+                      className="btn-large w-25 p-3 mx-auto center"
                       onClick={handleNextQuestion}
                       disabled={!isNextEnabled()} // Disable button if no valid answer
                     >
@@ -175,11 +175,14 @@ const HomePage: React.FC = () => {
               </div>
             ))
           ) : (
-            <h4>Loading questions...</h4>
+            <h4 className="fst-italic">Loading questions...</h4>
           )}
         </div>
       ) : (
-        <h1> You are not logged in! Please Log In to view this page</h1>
+        <div className="mx-auto p-3">
+          <h1 className="fw-bold">You are not logged in!</h1>
+          <h4 className="fst-italic">Please login to view this page</h4>
+        </div>
       )}
     </div>
   );
