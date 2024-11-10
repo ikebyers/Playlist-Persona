@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const CurrentPlaylist: React.FC = () => {
   const profile = auth.getProfile();
   const [playlist, setPlaylist] = useState<Song[]>([]);
-  const [loading, setLoading] = useState(true);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const [newPlaylist, setNewPlaylist] = useState<PlaylistData | undefined>({
     id: null,
