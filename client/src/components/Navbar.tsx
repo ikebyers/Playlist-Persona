@@ -64,9 +64,9 @@ const Nav = () => {
                             <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/home">
                                 Home
                             </NavLink>
-                            <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/currentPlaylist">
+                            {/* <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/currentPlaylist">
                                 Current Playlist
-                            </NavLink>
+                            </NavLink> */}
                             <NavLink type="button" className="nav-link rounded-pill btn btn-light" to="/profile">
                                 Profile
                             </NavLink>

@@ -25,10 +25,10 @@ const UserCard = ({id, username, name, email, deleteIndvUser}:UserCardProps) => 
 
   return (
     <div className='u-card'>
-      <h3>User ID: {id} </h3>
-      <h4>User Name: {username}</h4>
-      <h4>User Name: {name}</h4>
-      <h4>User Name: {email}</h4>
+      <h4>User ID: {id} </h4>
+      <h4>Username: {username}</h4>
+      <h4>Name: {name}</h4>
+      <h4>email: {email}</h4>
       <button value={String(id)} onClick={handleDelete}>Delete</button>
     </div>
   );
