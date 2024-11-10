@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-// import YouTube from "react-youtube";
 import auth from "../src/utils/auth";
 import { Song, PlaylistData } from '../src/interfaces/PlaylistData'
 import { createPlaylist } from "../src/api/playlistAPI";
@@ -16,7 +15,6 @@ const CurrentPlaylist: React.FC = () => {
     assignedUserId: null,
   });
   const [loading, setLoading] = useState(true);
-  // const [currentSong, setCurrentSong] = useState<string | null>(null);
   const [loginCheck, setLoginCheck] = useState(false);
   const [songListSaved, setSaved] = useState(false);
 
