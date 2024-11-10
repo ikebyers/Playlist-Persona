@@ -46,7 +46,7 @@ const CreateUser = () => {
     if (newUser) {
       const data = createNewUser(newUser);
       console.log(data);
-      navigate('/login');
+      navigate('/');
     }
   }
 
@@ -54,11 +54,14 @@ const CreateUser = () => {
   return (
     <div className="w-75 p-3 center">
       {loginCheck ? (
-        <h1>User Loged In, Navigate to the home page to create a playlist</h1>
+        <div>
+          <h1 className="fw-bold">User already logged in</h1>
+          <h3 className="body-text fst-italic">Navigate to the home page to create a playlist!</h3>
+        </div>
       ) : ( 
         <div className="w-75 p-3 center">
           <div className="navbarNavAltMarkup">
-            <h1>Create Account</h1>
+            <h1 className="fw-bold">Create Account</h1>
           </div>
           <div className="form-container container-fluid mb-3">
             <form className='form' onSubmit={handleSubmit}>
@@ -96,14 +99,14 @@ const CreateUser = () => {
               />
               <button type="submit" className="rounded-pill btn btn-large">Create Account</button>
               <div className="text-center mt-5">
-                <NavLink to="/login" className="body-text-tertiary">
+                <NavLink to="/" className="body-text-tertiary fst-italic">
                   Already have an account? Login here
                 </NavLink>
               </div>
             </form>
           </div>
         </div>
-       )}
+      )}
     </div>
   );
 }

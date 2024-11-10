@@ -36,7 +36,7 @@ const LoginPage = () => {
   <div className="w-75 p-3 center">
     <div className='form-container form-container container-fluid mb-3'>
       <form className='form login-form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h1 className="fw-bold">Login</h1>
         <div className='form-group form'>
           <input
             className='form-input form-control container-fluid'
@@ -62,7 +62,7 @@ const LoginPage = () => {
             Login
           </button>
         <div className="text-center mt-5">
-          <NavLink to="/" className="body-text-tertiary">
+          <NavLink to="/createAccount" className="body-text-tertiary fst-italic">
             Don't have an account yet? Create one here
           </NavLink>
         </div>
