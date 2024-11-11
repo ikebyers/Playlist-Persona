@@ -6,7 +6,7 @@ import UserCard from "../src/components/UserCard";
 import { useLocation } from "react-router-dom";
 import { ApiMessage } from "../src/interfaces/ApiMessage";
 import auth from "../src/utils/auth";
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import { retrievePlaylistsByUserId, deletePlaylist } from "../src/api/playlistAPI";
 import PlayListCard from "../src/components/PlaylistCard";
 
@@ -75,7 +75,7 @@ const ProfilePage = () => {
     try {
 
       const data = await deleteUser(userId);
-      toast.success("User has been deleted successfully!"); // Toast notification
+      // toast.success("User has been deleted successfully!"); // Toast notification
 
       // Wait for 5 seconds
       await wait(5000); // 5000 milliseconds = 5 seconds
@@ -94,7 +94,7 @@ const ProfilePage = () => {
     try {
 
       const data = await deletePlaylist(playListId);
-      toast.success("Playlist has been deleted successfully!"); // Toast notification
+      // toast.success("Playlist has been deleted successfully!"); // Toast notification
 
       // Wait for 5 seconds
       await wait(5000); // 5000 milliseconds = 5 seconds
@@ -120,7 +120,7 @@ const ProfilePage = () => {
         {user ? (
           <div>
             <div className="card-justify-align card">
-              <ToastContainer />
+              {/* {<ToastContainer />} */}
               <UserCard
                 key={user.id}
                 id={user.id}
